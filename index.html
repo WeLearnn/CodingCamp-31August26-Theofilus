@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do Life Dashboard</title>
+
+  <!-- Inline theme-init script: apply saved theme before stylesheet to prevent flash -->
+  <script>
+    (function () {
+      var theme = localStorage.getItem("dashboard_theme");
+      if (theme !== "light" && theme !== "dark") { theme = "light"; }
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <button id="theme-toggle" aria-label="Switch to dark mode">🌙 Switch to Dark</button>
+  </header>
+
+  <main class="dashboard-grid">
+
+    <section id="greeting">
+      <p id="clock" aria-live="polite" aria-label="Current time"></p>
+      <p id="date"></p>
+      <p id="greeting-text"></p>
+      <div class="name-input-row">
+        <input
+          type="text"
+          id="name-input"
+          maxlength="50"
+          placeholder="Enter your name"
+          aria-label="Your name for the greeting"
+        />
+        <button id="name-save">Save</button>
+      </div>
+    </section>
+
+    <section id="timer">
+      <p id="timer-display" aria-live="polite" aria-label="Timer display">25:00</p>
+      <div class="timer-controls">
+        <button id="timer-start" aria-label="Start timer">Start</button>
+        <button id="timer-stop" aria-label="Stop timer">Stop</button>
+        <button id="timer-reset" aria-label="Reset timer">Reset</button>
+      </div>
+      <p id="timer-complete" class="hidden" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="task-list">
+      <div class="task-input-row">
+        <input
+          type="text"
+          id="task-input"
+          maxlength="500"
+          placeholder="Add a new task…"
+          aria-label="New task description"
+        />
+        <button id="task-add-btn" type="button" aria-label="Add task">Add</button>
+      </div>
+      <span id="task-error" role="alert" aria-live="polite"></span>
+      <ul id="task-list-ul" aria-label="Task list"></ul>
+    </section>
+
+    <section id="link-panel">
+      <div class="link-input-row">
+        <input
+          type="text"
+          id="link-label-input"
+          maxlength="100"
+          placeholder="Label (e.g. GitHub)"
+          aria-label="Link display label"
+        />
+        <input
+          type="url"
+          id="link-url-input"
+          maxlength="2048"
+          placeholder="URL (e.g. github.com)"
+          aria-label="Link URL"
+        />
+        <button id="link-add-btn" type="button" aria-label="Add link">Add Link</button>
+      </div>
+      <span id="link-label-error" role="alert" aria-live="polite"></span>
+      <span id="link-url-error"   role="alert" aria-live="polite"></span>
+      <ul id="link-list-ul" aria-label="Quick links"></ul>
+    </section>
+
+  </main>
+
+  <!-- Storage error toast -->
+  <div id="storage-toast" role="alert" aria-live="polite"></div>
+
+  <script defer src="js/app.js"></script>
+</body>
+</html>
